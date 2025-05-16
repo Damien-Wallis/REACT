@@ -18,9 +18,28 @@ export default function PeopleContainer() {
     );
   }, []);
 
+  const filterPeople = (filter: string) => {
+    const filtered = people.filter((person) =>
+      person.name.toLowerCase().includes(filter.toLowerCase())
+    );
+    setPeople(filtered);
+  };
+
   return (
     <div>
-      <h1>abc</h1>
+      <h1>People</h1>
+      <div className="border">
+        <input
+          className="border p-8"
+          type="text"
+          placeholder="Search"
+          onChange={(el) => {
+            console.log(el.target.value);
+            filterPeople(el.target.value);
+          }}
+        />
+      </div>
+
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {people.map((person) => {
           return (
